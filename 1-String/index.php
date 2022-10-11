@@ -54,4 +54,45 @@ echo $vowels;
 
 echo "<pre>";
 
+// look and say sequence:
 
+function lookandsay($s){
+    //initialize the reutrn value to the empty string
+    $r = '';
+    // $m holds the character we're counting, initialize for the first
+    // character in the string
+    $m = $s[0];
+    // $n is the numver of $m's we've seen, initialize to 1;
+    $n = 1; 
+    for($i = 1, $j = strlen($s); $i < $j; $i++){
+        // if this character is the same as the last one 
+        if($s[$i] == $m){
+            // increment the count of theis character 
+            $n++;
+        } else{
+            // otherwise, add the count and character to the return value.
+            $r .= $n.$m;
+            // set the character we're looking for to the current one .
+            $m = $s[$i];
+            // and reset the count to 1.
+            $n = 1;
+        }
+    }
+    // return thebuilt up string as well as sthe last cound character 
+    return $r.$n.$m;
+}
+for ($i = 0, $s = 1; $i < 10; $i++){
+    $s = lookandsay($s);
+    echo "$s <br/>\n";
+}
+// OUTPUT
+// 1 
+// 11 
+// 21 
+// 1211 
+// 111221 
+// 312211 
+// 13112221 
+// 1113213211 
+// 31131211131221 
+// 13211311123113112211 
