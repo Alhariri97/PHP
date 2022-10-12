@@ -8,6 +8,7 @@
 //1 Strings
 // String methodes 
 echo "Hello PHP World";
+echo "<pre>";
 echo "\$\061\060.\x32\x35"; //What is gonna print?
 
 $strange = "hello @ hidden charecters";
@@ -34,10 +35,6 @@ echo substr_replace($name, "Allah", 6); // Just replace as it's clear of it's na
 echo "<pre>";
 echo $name;
 
-echo "<pre>";
-
-echo "<pre>";
-echo "<pre>";
 echo "<pre>";
 
 //1.4 Processing a string one byte at a time.
@@ -96,3 +93,145 @@ for ($i = 0, $s = 1; $i < 10; $i++){
 // 1113213211 
 // 31131211131221 
 // 13211311123113112211 
+
+echo "<pre>";
+
+// 1.5 Reversing a string by word or byte:
+echo "<pre>";
+echo $string;
+echo "<pre>";
+echo strrev($string);
+echo "<pre>";
+$words = explode( " ",$string); // break the string into words to an array
+$words = array_reverse($words); // revers the array
+$str = implode(" ", $words); // rebuild the string!
+echo $str;
+echo "<pre>";
+$reversed_s = implode(" ", array_reverse(explode(" ", $string))); // same as $str
+echo $reversed_s;
+echo "<pre>";
+// 1.7 Controlling case:
+echo ucfirst($string);
+echo "<pre>";
+echo lcfirst($string);
+echo "<pre>";
+echo strtolower('<A HREF= "ONE.PHP"> ONE </A> ');
+echo "<pre>";
+echo strtoupper("hello world");
+echo "<pre>";
+echo ucwords($string);
+echo "<pre>";
+// 1.8 Interpolating Functions and expressions within string:
+echo "the string ". $string ." is " . strlen($string) . " characters long.";
+echo "<pre>";
+echo date_default_timezone_get();
+
+echo "<pre>";
+date_default_timezone_set('UTC');
+echo date_default_timezone_get();
+echo "<pre>";
+
+print <<<END
+Right now , the time 
+is 
+END;
+echo date('l \t\h\e jS');
+print <<<END
+
+But tomorrow is 
+END;
+$tomorrow = new DateTime('tomorrow');
+echo $tomorrow->format('l \t\h\e jS');
+echo "<pre>";
+// 1.9 Trimming blanks from a string:
+echo trim("        Abdul       ");
+echo "<pre>";
+echo ltrim("     php ");
+echo "<pre>";
+echo rtrim("       php     ");
+echo "<pre>";
+echo trim(" ...  .. php    ...", ". ");
+echo "<pre>";
+// 1.10 Generating comma separated data:
+// Note it's not about the file handleing funciotns so it's alright 
+// if i did not get what is going on with the files funcs 
+
+echo "<pre>";
+$sales = array( array("Northeast", "2005-01-01", "2005-02-01", 12.54),
+                array("Northwest", "2005-01-01", "2005-02-01", 546.33),
+                array("Northwest", "2005-01-01", "2005-02-01", 276.90),
+                array("Northwest", "2005-01-01", "2005-02-01", 120.03),
+                array("All Regions", "--", "--", 39.54));
+$fh = fopen("sales.csv", "w") or die("Can't open sales.csv"); // CSV comma Separated Data
+foreach($sales as $sales_line){
+    if(fputcsv($fh, $sales_line) === false){ // Function PUT CSV > fputcsv
+        die("can't write CSV line");
+    }
+}
+fclose($fh) or die("cna't close sales.csv");
+// if gave an error says "Failed to open stream: Permission denied in /opt/lampp/htdocs/..."
+// chnage the file permissions:  sudo chmod -R 777 /path/to/directory
+// if all's good now a file with a name sales.csv should be created.
+echo "<pre>";
+// Now letes print the csv formatted using php://output
+$fh =  fopen('php://output', 'w');
+foreach($sales as $sales_line){
+    if(fputcsv($fh, $sales_line) === false){ // Function PUT CSV > fputcsv
+        die("can't write CSV line");
+    }
+}
+fclose($fh);
+// Output the screen should be:
+// Northeast,2005-01-01,2005-02-01,12.54
+// Northwest,2005-01-01,2005-02-01,546.33
+// Northwest,2005-01-01,2005-02-01,276.9
+// Northwest,2005-01-01,2005-02-01,120.03
+// "All Regions",--,--,39.54
+echo "<pre>";
+// Finally istaed of writing to the file or
+// printing the data out let's separate them with a comma.
+ob_start();
+$fh =  fopen('php://output', 'r') or die("can't open php://output");
+foreach($sales as $sales_line){
+    if(fputcsv($fh, $sales_line) === false){ // Function PUT CSV > fputcsv
+        die("can't write CSV line");
+    }
+}
+fclose($fh) or die("Can't close php://output");
+$output = ob_get_contents();
+ob_end_clean();
+echo "<pre>";
+echo $output;
+echo "<pre>";
+
+$arrayOfLines = explode( "\n",$output); // break the string into words to an array
+$JoinedArray = implode(",", $arrayOfLines); // rebuild the string!
+echo $JoinedArray;
+
+echo "<pre>";
+// Parsing comma separated data
+
+$fp = fopen("sales.csv", "r") or die("can't open file");
+echo " <table> \n";
+while($csv_line = fgetcsv($fp)){
+    echo ' <tr> ';
+    for($i = 0 , $j = count($csv_line); $i < $j ; $i++){
+        echo '<td>';
+        echo htmlentities($csv_line[$i]);
+        echo ' </td> ';
+    }
+    echo "</tr> \n";
+}
+echo "</table>\n";
+fclose($fp) or die("can't close file");
+echo "<pre>";
+echo "...............";
+echo "<pre>";
+echo readfile("file.txt");
+echo "<pre>"; 
+echo "<pre>"; 
+echo "<pre>"; 
+echo "<pre>"; 
+echo "<pre>"; 
+echo "<pre>"; 
+echo "<pre>"; 
