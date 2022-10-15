@@ -229,6 +229,12 @@ echo "...............";
 echo "<pre>";
 echo readfile("file.txt");
 echo "<pre>"; 
+$array = explode(" ", "Hello there, we are learning today , PHP");
+print_r($array);
+$array1 = preg_split("/\s/", "Hello there, we are learning today , PHP");
+// preg_split for regx, there was a split method but not anymore.
+print_r($array1);
+
 echo "<pre>"; 
 echo "<pre>"; 
 echo "<pre>"; 
