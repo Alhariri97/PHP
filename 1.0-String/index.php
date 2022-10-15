@@ -252,5 +252,3 @@ $nums = unpack("S4",$packed);
 print_r($nums);
 // That's shit, for some reason 0101 becomes 65 !
 echo "<pre>"; 
-
-echo "<pre>";  
