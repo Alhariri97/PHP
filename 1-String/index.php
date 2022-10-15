@@ -236,8 +236,21 @@ $array1 = preg_split("/\s/", "Hello there, we are learning today , PHP");
 print_r($array1);
 
 echo "<pre>"; 
+// 1.15 Wrapping text
+$text = "Four score and seven years ago our fathers brought forth on this continient anew nation, conceived in liberty and dedicated to the proposition that all men are created equal";
+echo "<pre>\n". wordwrap($text,30) ."\n</pre>"; 
+// it will wrap the lines to 30 chrs in line!
 echo "<pre>"; 
+$text = "Four score and seven years ago our fathers brought forth on this continient anew nation, conceived in liberty and dedicated to the proposition that all men are created equal";
+echo "<pre>\n". wordwrap($text,30, "\n\n") ."\n</pre>"; 
+// the saperator will be two new lines!
 echo "<pre>"; 
+// 1.16 Storing binary data in strings!
 echo "<pre>"; 
+$packed = pack('S4', 1997, 100, 0101, 2);
+$nums = unpack("S4",$packed);
+print_r($nums);
+// That's shit, for some reason 0101 becomes 65 !
 echo "<pre>"; 
-echo "<pre>"; 
+
+echo "<pre>";  
